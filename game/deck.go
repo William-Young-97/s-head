@@ -1,6 +1,10 @@
 package game
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 type Suit string
 type Rank string
@@ -48,4 +52,11 @@ func NewDeck() []Card {
 		}
 	}
 	return deck
+}
+
+func Shuffle(deck []Card) {
+	r := rand.New(rand.NewSource(time.Now().UnixNano())) // Create a new Rand instance
+	r.Shuffle(len(deck), func(i, j int) {
+		deck[i], deck[j] = deck[j], deck[i]
+	})
 }
